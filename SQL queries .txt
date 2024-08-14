@@ -1,0 +1,19 @@
+Tasks:SQL
+
+Fetch all transactions where the customer used a coupon.
+Find the best-selling products in each category.
+Calculate the average amount spent by customers in each purchase.
+Count the number of customers who have a subscription duration longer than 12 months.
+Find the city that generates the highest revenue.
+Determine the day with the highest number of transactions.
+Fetch transaction details that exceed a certain value.
+Calculate the percentage of marketing expenses relative to monthly revenues.
+Find the category with the highest tax rate and its sales volume.
+
+
+
+Task:PLSQL
+
+Function: Create a function that returns the total price of a specific transaction.
+Procedure: Create a procedure that inserts a new record into the sales table.
+Trigger: Create a trigger that logs changes made to any transaction.
