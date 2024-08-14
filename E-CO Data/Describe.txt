@@ -1,0 +1,60 @@
+I'll explain each table and the relationships between them:
+
+### TABLE 1: **CustomersData**
+- **CustomerID**: The unique identifier for each customer.
+- **Gender**: The customer's gender (M for male, F for female).
+- **Location**: The city where the customer is located.
+- **Tenure_Months**: The number of months the customer has been subscribed or a customer.
+
+**Example:**  
+`17850, M, Chicago, 12`
+
+### TABLE 2: **Discount_Coupon**
+- **Month**: The month in which the coupon was used.
+- **Product_Category**: The category of the product for which the coupon was used.
+- **Coupon_Code**: The coupon code.
+- **Discount_pct**: The discount percentage offered by the coupon.
+
+**Example:**  
+`Jan, Apparel, SALE10, 10`
+
+### TABLE 3: **Marketing_Spend**
+- **Date**: The date on which the expenses were incurred.
+- **Offline_Spend**: The expenses spent on traditional channels (TV, radio, etc.).
+- **Online_Spend**: The expenses spent on online channels (Google ads, Facebook, etc.).
+
+**Example:**  
+`1/1/2019, 4500, 2424.5`
+
+### TABLE 4: **Online_Sales**
+- **CustomerID**: The unique identifier for each customer.
+- **Transaction_ID**: The unique identifier for each sale transaction.
+- **Transaction_Date**: The date of the sale transaction.
+- **Product_SKU**: The unique identifier for the product.
+- **Product_Description**: The product description.
+- **Product_Category**: The category of the product.
+- **Quantity**: The number of units purchased by the customer.
+- **Avg_Price**: The average price per unit.
+- **Delivery_Charges**: The delivery charges.
+- **Coupon_Status**: Whether the coupon was used or not.
+
+**Example:**  
+`17850, 16679, 1/1/2019, GGOENEBJ079499, Nest Learning Thermostat 3rd Gen-USA - Stainless Steel, Nest-USA, 1, 153.71, 6.5, Used`
+
+### TABLE 5: **TAX_Amount**
+- **Product_Category**: The category of the product.
+- **GST**: The percentage of Goods and Services Tax (GST) applied.
+
+**Example:**  
+`Nest-USA, 10%`
+
+### Relationships Between the Tables:
+- **CustomersData** and **Online_Sales**: They have a direct relationship through `CustomerID`. This allows us to link personal customer data (such as gender and location) with their transactions.
+
+- **Discount_Coupon** and **Online_Sales**: The relationship is through `Product_Category` and `Coupon_Status`. We can determine whether a coupon was used in a particular sale and what the discount percentage was.
+
+- **Marketing_Spend** and **Online_Sales**: This is an indirect but important relationship. We can link marketing expenses on a specific day with sales on the same day to understand the impact of marketing on sales.
+
+- **TAX_Amount** and **Online_Sales**: The relationship here is `Product_Category`. Different taxes apply depending on the product category, allowing us to calculate the tax for each sale.
+
+These relationships between the tables enable us to conduct in-depth analyses, such as revenue calculations, customer understanding, marketing campaign evaluations, and more.
