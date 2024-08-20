@@ -4,7 +4,7 @@ use ecommerce_db
 -- Procedure for creating the CustomersInfo table
 DELIMITER //
 CREATE PROCEDURE Create_CustomersInfo_Table()
-BEGIN
+BEGINonline_sales_history
     CREATE TABLE IF NOT EXISTS CustomersInfo (
         CustomerID int primary key,
         Gender varchar(2),
@@ -377,5 +377,30 @@ BEGIN
 END //
 DELIMITER ;
 
+-- create procedure of join customersinfo_online_sales
+delimiter //
+create procedure customersinfo_Salse()
+begin
+	select O.CustomerID  , O.Product_Description , O.Quantity , O.Avg_Price , O.Delivery_Charges , O.Coupon_Status , C.Gender , C.Location  , C.Tenure_Months
+	from online_sales O
+	inner join customersinfo C
+	on O.CustomerID = C.CustomerID ;
+end //
+
+-- relation betwen Long_Tenure and Salses
+
+drop procedure if exists Long_Tenure;
+delimiter //
+create  procedure Long_Tenure()
+begin
+	select O.CustomerID ,
+    count(O.CustomerID) as Totales_Salses,
+	C.Tenure_Months
+	from online_sales O
+	inner join customersinfo C
+	on O.CustomerID = C.CustomerID 
+    group by O.CustomerID
+    order by C.Tenure_Months desc;
+end //
 
 
