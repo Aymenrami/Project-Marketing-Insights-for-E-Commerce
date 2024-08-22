@@ -4,7 +4,7 @@ use ecommerce_db
 -- Procedure for creating the CustomersInfo table
 DELIMITER //
 CREATE PROCEDURE Create_CustomersInfo_Table()
-BEGINonline_sales_history
+BEGIN
     CREATE TABLE IF NOT EXISTS CustomersInfo (
         CustomerID int primary key,
         Gender varchar(2),
@@ -403,4 +403,40 @@ begin
     order by C.Tenure_Months desc;
 end //
 
+drop procedure AddSeasonColumn
+DELIMITER //
+-- procedure to add a season Column 
+CREATE PROCEDURE AddSeasonColumn()
+BEGIN
+    SELECT *,
+        CASE
+            WHEN month IN ('Dec','Jan','Feb') THEN 'Winter'
+            WHEN month IN ('Mar','Apr', 'May') THEN 'Spring'
+            WHEN month IN ('Jul','Jun','Aug') THEN 'Summer'
+            WHEN month IN ('Sep','Oct', 'Nov') THEN 'Fall'
+            ELSE 'Invalid Month'
+        END AS season
+    FROM discount_coupon;
+END //
+
+DELIMITER ;
+
+-- Procedure for How meny Transaction by days
+drop procedure if exists GetMarketingSpendSummary
+delimiter //
+create procedure GetMarketingSpendSummary()
+begin
+	select 
+		M.Date , 
+        M.Offline_Spend , 
+        M.Online_Spend ,
+        sum(O.Quantity) as  Quantity ,
+        sum(O.Avg_Price) as Avg_Price ,
+        sum(O.Delivery_Charges) as Delivery_Charges  ,
+        count(O.Transaction_Date) as Transaction_Count
+	from marketing_spend M 
+	inner join online_sales O 
+	on M.Date  = O.Transaction_Date 
+	group by M.Date, M.Offline_Spend, M.Online_Spend;
+end //
 
