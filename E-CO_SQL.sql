@@ -433,7 +433,7 @@ begin
         sum(O.Quantity) as  Quantity ,
         sum(O.Avg_Price) as Avg_Price ,
         sum(O.Delivery_Charges) as Delivery_Charges  ,
-        count(O.Transaction_Date) as Transaction_Count
+        count(O.Transaction_Date) as Transaction_Counonline_salest
 	from marketing_spend M 
 	inner join online_sales O 
 	on M.Date  = O.Transaction_Date 
